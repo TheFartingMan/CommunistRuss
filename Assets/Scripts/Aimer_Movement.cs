@@ -37,7 +37,7 @@ public class Aimer_Movement : MonoBehaviour
 
 
         //}
-        Value_for_rotation = Value_for_rotation + rotationSpeed;
+        Value_for_rotation += rotationSpeed * Time.deltaTime;
         Aimerx = Math.Cos(Value_for_rotation*Math.PI/180);
         Aimery = Math.Sin(Value_for_rotation*Math.PI/180);
 

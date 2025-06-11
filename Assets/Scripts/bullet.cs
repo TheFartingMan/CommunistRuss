@@ -17,12 +17,11 @@ public class bullet : MonoBehaviour
     void Update()
     {
     }
-
     void OnTriggerEnter2D(Collider2D other)
     {
-        Destroy(gameObject);
-        
+        if (other.CompareTag("enemy"))
+        {
+            Destroy(gameObject);
+        }
     }
-
-
 }

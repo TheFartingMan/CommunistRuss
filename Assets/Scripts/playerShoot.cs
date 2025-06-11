@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Rendering.Universal;
 
 public class playerShoot : MonoBehaviour
 
- 
+
 
 {
     public Vector2 targetPosition;
@@ -19,10 +20,13 @@ public class playerShoot : MonoBehaviour
     public GameObject Target;
     public GameObject Aimer;
     private Target TargetScript;
+    private float timer = 0f;
+    private float fireCooldown;
+    public int ShotsPerSecondMaximum;
 
     void Shoot()
     {
-        
+
 
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawnPoint.position, Aimer.transform.rotation);
         bullet bulletScript = bullet.GetComponent<bullet>();
@@ -35,10 +39,15 @@ public class playerShoot : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.UpArrow))
+        fireCooldown = 1f / ShotsPerSecondMaximum;
+        timer += Time.deltaTime;
+
+        bool fireHeld = Input.GetKey(KeyCode.Space) || Input.GetKey(KeyCode.UpArrow);
+
+        if (fireHeld && timer >= fireCooldown)
         {
             Shoot();
+            timer = 0f; // reset cooldown timer
         }
     }
 
@@ -49,6 +58,11 @@ public class playerShoot : MonoBehaviour
 
         TargetScript.SpawnTarget();
         TargetScript.SpawnTarget();
-        TargetScript.SpawnTarget();        
+        TargetScript.SpawnTarget();
+
+    }
+    public void increaseShotsPerSecondMaximum()
+    {
+        ShotsPerSecondMaximum++;
     }
 }
