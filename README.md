@@ -1,6 +1,6 @@
 Hi everybody. This is a litte game that I made just for fun.
 
-Controlls: Left and right arrow keys and spacebar to shoot. You can also click on the shop buttons
+Controls: Left and right arrow keys and spacebar to shoot. You can also click on the shop buttons
 
 # STEPS TO PLAYING THE GAME:
 <p>Click on the green "Code" button on the top right and download the zip.</p>
