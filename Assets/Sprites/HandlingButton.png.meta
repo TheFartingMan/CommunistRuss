@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 72dee59014d6f424aad0fec0b61876b5
+guid: 664c98df230c7f04683213cfb59c4cc3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1149097053765919317
-    second: BasicEnemy4_0
+      213: 516120659317103856
+    second: HandlingButton_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -152,7 +152,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BasicEnemy4_0
+      name: HandlingButton_0
       rect:
         serializedVersion: 2
         x: 0
@@ -167,8 +167,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: bad95d951569d00f0800000000000000
-      internalID: -1149097053765919317
+      spriteID: 0fc16df4101a92700800000000000000
+      internalID: 516120659317103856
       vertices: []
       indices: 
       edges: []
@@ -187,7 +187,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      BasicEnemy4_0: -1149097053765919317
+      HandlingButton_0: 516120659317103856
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
