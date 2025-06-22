@@ -46,16 +46,6 @@ public class playerShoot : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        TargetScript = Target.GetComponent<Target>();
-
-
-        TargetScript.SpawnTarget();
-        TargetScript.SpawnTarget();
-        TargetScript.SpawnTarget();
-
-    }
     public void increaseShotsPerSecondMaximum()
     {
         ShotsPerSecondMaximum++;

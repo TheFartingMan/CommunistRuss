@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class Target : MonoBehaviour
 {
     public GameObject TargetPrefab;
@@ -29,29 +28,25 @@ public class Target : MonoBehaviour
         if (other.CompareTag("Bullet"))
         {
 
-        Destroy(gameObject);
+            Destroy(gameObject);
         }
-        
+
     }
 
-    public void SpawnTarget(){
+    public void SpawnTarget()
+    {
+        float SharedRandomVariable = Random.value;
         float randomPosx;
         float randomPosy;
+        randomPosx = 7* Mathf.Cos(SharedRandomVariable*2*Mathf.PI);
+        randomPosy = 7* Mathf.Sin(SharedRandomVariable*2*Mathf.PI);
 
-
-        if (Random.value < 0.5f)
-        {
-            randomPosx = Random.Range(-9f, -8f);
-        }
-        else 
-        {
-            randomPosx = Random.Range(8f,9f);
-        }
-        randomPosy = Random.Range(-4f,4f);
         Vector2 Randomposition = new Vector2(randomPosx, randomPosy);
         GameObject Target = Instantiate(TargetPrefab, Randomposition, TargetPosition.rotation);
         Target.GetComponent<Collider2D>().enabled = true;
         Target.GetComponent<Target>().enabled = true;
     }
+    
 
 }
+
