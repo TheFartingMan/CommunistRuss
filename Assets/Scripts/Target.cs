@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 public class Target : MonoBehaviour
 {
     public GameObject TargetPrefab;
@@ -8,9 +9,12 @@ public class Target : MonoBehaviour
 
     [SerializeField] private float speed;
     public Transform playerTransform;
+    private HealthBar HealthBar;
+    private bool Alive;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        Alive = true;
     }
     void Update()
     {
@@ -30,9 +34,14 @@ public class Target : MonoBehaviour
 
             Destroy(gameObject);
         }
-
+        if (other.CompareTag("Player") && Alive)
+        {
+            Alive = false;
+            HealthBar = FindAnyObjectByType<HealthBar>();
+            HealthBar.SubtractHealth();
+            Destroy(gameObject);
+        }
     }
-
     public void SpawnTarget()
     {
         float SharedRandomVariable = Random.value;

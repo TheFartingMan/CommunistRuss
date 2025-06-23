@@ -181,3 +181,4 @@ MonoBehaviour:
   playerlocation: {x: 0, y: 0}
   speed: 0.5
   playerTransform: {fileID: 1243574975288988470, guid: 3e25a0b62e0ce8c47b33911958850c29, type: 3}
+  HealthBar: {fileID: 4161741467632978121, guid: b47ca69e550e3c640b9ae1285baf5644, type: 3}
