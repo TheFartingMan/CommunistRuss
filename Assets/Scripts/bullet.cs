@@ -8,6 +8,7 @@ public class bullet : MonoBehaviour
     private Rigidbody2D rb;
     public GameObject Aimer;
     public Aimer_Movement AimerScript;
+    public float damage = 1f;
     public void Initialize()
     {
         rb = GetComponent<Rigidbody2D>();

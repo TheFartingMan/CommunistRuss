@@ -10,11 +10,9 @@ public class Target : MonoBehaviour
     [SerializeField] private float speed;
     public Transform playerTransform;
     private HealthBar HealthBar;
-    private bool Alive;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        Alive = true;
     }
     void Update()
     {
@@ -34,26 +32,12 @@ public class Target : MonoBehaviour
 
             Destroy(gameObject);
         }
-        if (other.CompareTag("Player") && Alive)
+        if (other.CompareTag("Player"))
         {
-            Alive = false;
             HealthBar = FindAnyObjectByType<HealthBar>();
-            HealthBar.SubtractHealth();
+            HealthBar.SubtractHealth(1);
             Destroy(gameObject);
         }
-    }
-    public void SpawnTarget()
-    {
-        float SharedRandomVariable = Random.value;
-        float randomPosx;
-        float randomPosy;
-        randomPosx = 7* Mathf.Cos(SharedRandomVariable*2*Mathf.PI);
-        randomPosy = 7* Mathf.Sin(SharedRandomVariable*2*Mathf.PI);
-
-        Vector2 Randomposition = new Vector2(randomPosx, randomPosy);
-        GameObject Target = Instantiate(TargetPrefab, Randomposition, TargetPosition.rotation);
-        Target.GetComponent<Collider2D>().enabled = true;
-        Target.GetComponent<Target>().enabled = true;
     }
     
 

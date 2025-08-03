@@ -10,11 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 8805763252397787695}
   - component: {fileID: 1096281597247601507}
-  - component: {fileID: -4808175027758578755}
+  - component: {fileID: 8579422182593889661}
   - component: {fileID: -2654372469326977581}
-  - component: {fileID: 1721804462533067980}
+  - component: {fileID: 724475386110434855}
   m_Layer: 0
-  m_Name: BasicEnemy2 1
+  m_Name: TestEnemy
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 1178342510626657174, guid: c889dfd02481d3d419abe9173cf3a761, type: 3}
+  m_Sprite: {fileID: -1149097053765919317, guid: 72dee59014d6f424aad0fec0b61876b5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &-4808175027758578755
+--- !u!61 &8579422182593889661
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,7 +124,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.00079861283, y: 0.0006639883}
+  m_Offset: {x: 0.0005155802, y: -0.0005155727}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -134,7 +134,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.3225435, y: 0.32498455}
+  m_Size: {x: 0.3255039, y: 0.32550395}
   m_EdgeRadius: 0
 --- !u!50 &-2654372469326977581
 Rigidbody2D:
@@ -163,7 +163,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1721804462533067980
+--- !u!114 &724475386110434855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,13 +172,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6656895726740768816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3885acc4b5b7f4583b6a5cc411c3db, type: 3}
+  m_Script: {fileID: 11500000, guid: 3ff6063292afda34f9aaf6c6f7d5cb25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPrefab: {fileID: 6656895726740768816}
-  TargetPosition: {fileID: 8805763252397787695}
-  rb: {fileID: -2654372469326977581}
-  playerlocation: {x: 0, y: 0}
-  speed: 0.5
-  playerTransform: {fileID: 1243574975288988470, guid: 3e25a0b62e0ce8c47b33911958850c29, type: 3}
-  HealthBar: {fileID: 4161741467632978121, guid: b47ca69e550e3c640b9ae1285baf5644, type: 3}
+  EnemyHealth: 2
+  Speed: 3
+  Damage: 30
+  player: {fileID: 0}
+  target: {fileID: 0}

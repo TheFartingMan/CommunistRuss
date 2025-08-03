@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
@@ -12,12 +13,17 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private AudioSource DeathSoundEffectsource;
     [SerializeField] private AudioClip clip;
     private bool Alive;
+    private bool Unkillable;
+    private bool EveryOther;
+    private float EnemyDamage;
 
     private void Start()
     {
         currentHealth = totalHealth;
         totalhealthBar.fillAmount = currentHealth / totalHealth;
         Alive = true;
+        EveryOther = true;
+        Unkillable = false;
     }
 
     private void Update()
@@ -34,8 +40,28 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    public void SubtractHealth()
+    public void SubtractHealth(int EnemyDamage)
     {
-        currentHealth--;
+        if (Unkillable == false)
+        {
+            currentHealth -= EnemyDamage;   
+        }
+        
+    }
+
+    public void InfiniteHealth()
+    {
+
+        if (EveryOther == true)
+        {
+            Unkillable = true;
+        }
+
+        else
+        {
+            Unkillable = false;
+        }
+        
+        EveryOther = !EveryOther;
     }
 }

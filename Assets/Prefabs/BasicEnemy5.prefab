@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1096281597247601507}
   - component: {fileID: -7715239775971662988}
   - component: {fileID: -2654372469326977581}
-  - component: {fileID: 1721804462533067980}
+  - component: {fileID: 2921202424534171470}
   m_Layer: 0
   m_Name: BasicEnemy5
   m_TagString: enemy
@@ -87,7 +87,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!61 &-7715239775971662988
@@ -163,7 +163,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &1721804462533067980
+--- !u!114 &2921202424534171470
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -172,12 +172,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 6656895726740768816}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f3885acc4b5b7f4583b6a5cc411c3db, type: 3}
+  m_Script: {fileID: 11500000, guid: 013bf7f17b6d6d4419a2afb69b9d77ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetPrefab: {fileID: 6656895726740768816}
-  TargetPosition: {fileID: 8805763252397787695}
-  rb: {fileID: -2654372469326977581}
-  playerlocation: {x: 0, y: 0}
-  speed: 0.5
-  playerTransform: {fileID: 1243574975288988470, guid: 3e25a0b62e0ce8c47b33911958850c29, type: 3}
+  EnemyHealth: 10
+  Speed: 1
+  Damage: 20
+  target: {fileID: 0}
