@@ -6,6 +6,7 @@ public abstract class BasicEnemyFunction : MonoBehaviour
     [SerializeField] public float EnemyHealth;
     [SerializeField] public float Speed;
     [SerializeField] public int Damage;
+    [SerializeField] public string EnemyDebugNumber;
     public Transform target;
 
     protected virtual void Start()
@@ -42,11 +43,14 @@ public abstract class BasicEnemyFunction : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        bullet bullet = other.GetComponent<bullet>();
+
         if (other.CompareTag("Bullet"))
         {
+            bullet bullet = other.GetComponent<bullet>();
             TakeDamage(bullet.damage);
+            Destroy(other.gameObject);
         }
+
         if (other.CompareTag("Player"))
         {
             HealthBar healthBar = FindAnyObjectByType<HealthBar>();

@@ -43,6 +43,9 @@ public class Aimer_Movement : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, (float)Value_for_rotation - 90));
         transform.position = new Vector3((float)Aimerx, (float)Aimery, transform.position.z);
+
+
+        Value_for_rotation = Value_for_rotation % 360;
     }
 
 

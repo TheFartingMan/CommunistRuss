@@ -4,13 +4,13 @@ using UnityEngine.UI;
 public class DevMenuToggle : MonoBehaviour
 {
     public GameObject DevMenuGameObject;
-    private bool everyOther;
+    private bool everyOther = false;
     private float ButtonCooldownTimer;
 
 
     void Start()
     {
-        ButtonCooldownTimer = 1;
+        ButtonCooldownTimer = 0;
     }
 
 

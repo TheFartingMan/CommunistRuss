@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2622775050643042302}
   - component: {fileID: -2654372469326977581}
   - component: {fileID: 7609478462250694898}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BasicEnemy3
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -178,4 +178,5 @@ MonoBehaviour:
   EnemyHealth: 4
   Speed: 0.75
   Damage: 8
+  EnemyDebugNumber: 3
   target: {fileID: 0}

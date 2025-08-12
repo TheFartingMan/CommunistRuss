@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Runtime.CompilerServices;
+using System.Linq;
 public class EnemyDirector : MonoBehaviour
 {
 
@@ -15,6 +17,7 @@ public class EnemyDirector : MonoBehaviour
     public float EnemySpawnTimer;
     [SerializeField] private GameObject[] enemyPrefabs;
     private float EnemySpawnTime;
+    [SerializeField] private float WavePercentageOfTrickle = .90f;
 
     [SerializeField] private float EnemySpawnPoint;
 
@@ -23,15 +26,24 @@ public class EnemyDirector : MonoBehaviour
     [SerializeField] private int totalEnemyCost;
 
     [SerializeField] private Vector2 spawnPoint;
+    [SerializeField] private int WaveCounter;
+    private int PotentialEnemyCounter = 0;
+    private bool WaveIsOver = false;
+    private int EnemiesLeftInBag;
+    private int WaveEnemyIndex = 0;
+    private bool PrepForWave;
 
     void Update()
     {
         EnemySpawnTime += Time.deltaTime;
-        if (EnemySpawnTime >= EnemySpawnTimer)
+        if (EnemySpawnTime >= EnemySpawnTimer && EnemiesLeftInBag > 0)
         {
-        SpawnEnemy();
+            SpawnEnemy();
         }
-
+        if (EnemySpawnTime >= EnemySpawnTimer * .2 && EnemiesLeftInBag <= 0)
+        {
+            SpawnEnemy();
+        }
     }
 
 
@@ -83,20 +95,19 @@ public class EnemyDirector : MonoBehaviour
 
     void Start()
     {
-        for (int i = 0; i < basicEnemyCosts.Length; i++)
-        {
-            int index = i; // capture loop variable
-            PotentialEnemies.Add(new Enemy(basicEnemyCosts[i], index, () => amountOfEnemies[index]++));
-        }
+        PotentialEnemies.Add(new Enemy(basicEnemyCosts[0], 0, () => amountOfEnemies[0]++));
+
         SetUpBag();
         usedEnemies = 0;
+        WaveCounter = 0;
+        PrepForWave = true;
     }
 
     public void SpawnEnemy()
     {
-        int EnemiesLeftInBag = EnemiesInBag.Count - usedEnemies;
-        bool WaveIsOver = false;
-        float WavePercentageOfTrickle = .90f;
+        EnemiesLeftInBag = EnemiesInBag.Count - usedEnemies;
+        
+        
 
         //If the bag still has stuff
 
@@ -117,17 +128,32 @@ public class EnemyDirector : MonoBehaviour
         //Wave
         if (EnemiesLeftInBag <= 0)
         {
-
-
-            for (int i = 0; i < (EnemiesInBag.Count * WavePercentageOfTrickle); i++)
+            if (PrepForWave == true)
             {
-                Enemy enemyToSpawn = EnemiesInBag[i];
+                RemoveRandomTricklePercent(EnemiesInBag);
+                //turn on huge wave text
+                PrepForWave = false;
+            }
+            
+
+            if (PrepForWave == false)
+            {
+                Enemy enemyToSpawn = EnemiesInBag[WaveEnemyIndex];
                 FindEnemySpawnPosition();
                 Instantiate(enemyPrefabs[enemyToSpawn.prefabIndex], spawnPoint, Quaternion.identity);
+                WaveEnemyIndex++;
+                EnemySpawnTime = 0f;
             }
 
 
-            WaveIsOver = true;
+
+            if (WaveEnemyIndex >= EnemiesInBag.Count)
+            {
+              WaveIsOver = true;  
+            }
+           
+
+            
         }
 
         //Refill and increase difficulty
@@ -135,11 +161,14 @@ public class EnemyDirector : MonoBehaviour
         if (WaveIsOver == true)
         {
             EnemiesInBag.Clear();
-            SetUpBag();
             IncreaseDifficulty();
+            SetUpBag();
             usedEnemies = 0;
             totalEnemyCost = 0;
             WaveIsOver = false;
+            WaveEnemyIndex = 0;
+            WaveCounter++;
+            PrepForWave = true;
         }
 
 
@@ -153,18 +182,43 @@ public class EnemyDirector : MonoBehaviour
         float SharedRandomVariable = UnityEngine.Random.value;
         float randomPosx;
         float randomPosy;
-        randomPosx = EnemySpawnPoint * Mathf.Cos(SharedRandomVariable*2*Mathf.PI);
-        randomPosy = EnemySpawnPoint * Mathf.Sin(SharedRandomVariable*2*Mathf.PI);
+        randomPosx = EnemySpawnPoint * Mathf.Cos(SharedRandomVariable * 2 * Mathf.PI);
+        randomPosy = EnemySpawnPoint * Mathf.Sin(SharedRandomVariable * 2 * Mathf.PI);
 
         spawnPoint = new Vector2(randomPosx, randomPosy);
     }
 
     public void IncreaseDifficulty()
     {
-        SetBagCredits = (int)Math.Floor(SetBagCredits * 1.10);
-        EnemySpawnTimer = EnemySpawnTimer * 0.99f;
+        SetBagCredits = (int)Math.Floor(SetBagCredits * 1.5);
+        EnemySpawnTimer -= .02f;
+
+        if (WaveCounter % 3 == 2)
+        {
+            AddNextPotentialEnemy();
+            return;
+        }
     }
 
+    public void AddNextPotentialEnemy()
+    {
+        PotentialEnemyCounter++;
+        PotentialEnemies.Add(new Enemy(basicEnemyCosts[PotentialEnemyCounter], PotentialEnemyCounter, () => amountOfEnemies[PotentialEnemyCounter]++));
+    }
 
+void RemoveRandomTricklePercent<T>(List<T> list)
+    {
+        int countToRemove = Mathf.FloorToInt(list.Count * (1-WavePercentageOfTrickle));
+
+        // Shuffle the list indices randomly
+        List<int> indices = Enumerable.Range(0, list.Count).OrderBy(i => UnityEngine.Random.value).ToList();
+
+        // Remove from the end (to avoid index shift issues)
+        for (int i = 0; i < countToRemove; i++)
+        {
+            int indexToRemove = indices[i];
+            list.RemoveAt(indexToRemove - i); // adjust for shifted indices
+        }
+    }
 
 }
